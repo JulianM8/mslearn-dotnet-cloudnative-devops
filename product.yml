@@ -3,10 +3,11 @@ kind: Deployment
 metadata:
   name: productservice
 spec:
-  selector: # Define the wrapping strategy
-    matchLabels: # Match all pods with the defined labels
-      app: productservice # Labels follow the `name: value` template
-  template: # This is the template of the pod inside the deployment
+  replicas: 1
+  selector:
+    matchLabels:
+      app: productservice
+  template:
     metadata:
       labels:
         app: productservice
@@ -14,8 +15,8 @@ spec:
       nodeSelector:
         kubernetes.io/os: linux
       containers:
-        - image: [replace with your ACR name].azurecr.io/productservice:latest
-          name: productservice
+        - name: productservice
+          image: acseshop1776646759.azurecr.io/productservice:latest
           resources:
             requests:
               cpu: 100m
